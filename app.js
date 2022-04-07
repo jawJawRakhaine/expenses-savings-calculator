@@ -1,4 +1,4 @@
-// get valur from input
+// get value from input field
 function getValue(id) {
   return parseFloat(document.getElementById(id).value);
 }
@@ -8,6 +8,7 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   let rentCost = getValue("rent-cost");
   let clothesCost = getValue("clothes-cost");
 
+  // validation for input field
   if (totalIncome < 0 || foodCost < 0 || rentCost < 0 || clothesCost < 0) {
     alert("Please enter positive numbers");
   } else if (totalIncome < foodCost + rentCost + clothesCost) {
@@ -17,10 +18,10 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   } else if (!totalIncome || !foodCost || !rentCost || !clothesCost) {
     alert("Please enter all fields");
   } else {
-    //   expenses
+    //   calculate the total expenses
     let totalExpenses = (foodCost + rentCost + clothesCost).toFixed(2);
 
-    //   after expenses remaining balance
+    //   after expenses remaining balance and set value on DOM
     let totalSavings = totalIncome - totalExpenses;
     let expenses = document.getElementById("total-expenses");
     expenses.innerText = totalExpenses;
@@ -29,7 +30,9 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
 
     //   savings button add event listener
     document.getElementById("save-btn").addEventListener("click", function () {
+      // call getValue() function to get percentage value
       let savingsValue = getValue("savings-percent");
+      // validation for input
       if (savingsValue < 0) {
         alert(
           "Saving percentage cannot be negative. Please enter a positive number"
@@ -37,13 +40,16 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
       } else if (!savingsValue) {
         alert("Please enter a saving percentage.");
       } else {
+        // calculate the savings amount
         let savingsPercent = savingsValue / 100;
         let savingsAmount = totalSavings * savingsPercent;
+        // validation for savings amount is greater than total savings
         if (savingsAmount > totalSavings) {
           alert(
             "You have exceeded your savings goal. Please enter a lower percentage."
           );
         } else {
+          // set value to DOM
           document.getElementById("saved").innerText = savingsAmount.toFixed(2);
           document.getElementById("remain").innerText = (
             totalSavings - savingsAmount
