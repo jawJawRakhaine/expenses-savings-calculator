@@ -20,3 +20,6 @@ button:hover,
   -webkit-appearance: none;
   box-shadow: none !important;
 }
+.opacity{
+  opacity: 0.9;
+}
