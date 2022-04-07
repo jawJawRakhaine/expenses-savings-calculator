@@ -1,13 +1,12 @@
+// get valur from input
+function getValue(id) {
+  return parseFloat(document.getElementById(id).value);
+}
 document.getElementById("calculate-btn").addEventListener("click", function () {
-  let totalIncome = document.getElementById("total-income").value;
-  let foodCost = document.getElementById("food-cost").value;
-  let rentCost = document.getElementById("rent-cost").value;
-  let clothesCost = document.getElementById("clothes-cost").value;
-
-  totalIncome = parseFloat(totalIncome);
-  foodCost = parseFloat(foodCost);
-  rentCost = parseFloat(rentCost);
-  clothesCost = parseFloat(clothesCost);
+  let totalIncome = getValue("total-income");
+  let foodCost = getValue("food-cost");
+  let rentCost = getValue("rent-cost");
+  let clothesCost = getValue("clothes-cost");
 
   if (totalIncome < 0 || foodCost < 0 || rentCost < 0 || clothesCost < 0) {
     alert("Please enter positive numbers");
@@ -28,20 +27,22 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
     let savedBalance = document.getElementById("total-balance");
     savedBalance.innerText = totalSavings.toFixed(2);
 
-    //   savings
-
+    //   savings button add event listener
     document.getElementById("save-btn").addEventListener("click", function () {
-      let savings = document.getElementById("savings-percent").value;
-      savings = parseFloat(savings);
-      if (savings < 0) {
-        alert("Saving percentage cannot be negative");
-      } else if (!savings) {
-        alert("Please enter a saving percentage");
+      let savingsValue = getValue("savings-percent");
+      if (savingsValue < 0) {
+        alert(
+          "Saving percentage cannot be negative. Please enter a positive number"
+        );
+      } else if (!savingsValue) {
+        alert("Please enter a saving percentage.");
       } else {
-        let savingsPercent = savings / 100;
+        let savingsPercent = savingsValue / 100;
         let savingsAmount = totalSavings * savingsPercent;
         if (savingsAmount > totalSavings) {
-          alert("You have exceeded your savings goal");
+          alert(
+            "You have exceeded your savings goal. Please enter a lower percentage."
+          );
         } else {
           document.getElementById("saved").innerText = savingsAmount.toFixed(2);
           document.getElementById("remain").innerText = (
@@ -49,12 +50,6 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
           ).toFixed(2);
         }
       }
-
-      //   totalIncome.value = "";
-      //   foodCost.value = "";
-      //   rentCost.value = "";
-      //   clothesCost.value = "";
-      //   savings.value = "";
     });
   }
 });
