@@ -23,3 +23,7 @@ button:hover,
 .opacity{
   opacity: 0.9;
 }
+.img-banner{
+  height: 578px !important;
+  object-fit: cover;
+}
